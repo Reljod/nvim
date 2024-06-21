@@ -750,6 +750,9 @@ require('lazy').setup({
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      { 'windwp/nvim-ts-autotag' },
+    },
     build = ':TSUpdate',
     opts = {
       ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'python' },
@@ -763,6 +766,8 @@ require('lazy').setup({
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
+      autopairs = { enable = true },
+      autotag = { enable = true },
     },
     config = function(_, opts)
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
@@ -780,7 +785,28 @@ require('lazy').setup({
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
   },
-
+  {
+    'windwp/nvim-ts-autotag',
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+    config = function()
+      require('nvim-ts-autotag').setup {
+        enable = true,
+        filetypes = { 'html', 'text', 'tsx', 'jsx', 'python' },
+        indent = { enable = true },
+        autotag = { enable = true },
+        autopairs = { enable = true },
+      }
+    end,
+    lazy = true,
+    event = 'VeryLazy',
+  },
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    config = true,
+    -- use opts = {} for passing setup options
+    -- this is equalent to setup({}) function
+  },
   {
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
