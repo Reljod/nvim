@@ -160,7 +160,6 @@ require('lazy').setup({
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
-  { 'mfussenegger/nvim-jdtls' },
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
   --    require('gitsigns').setup({ ... })
@@ -347,35 +346,63 @@ require('lazy').setup({
       { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
-      -- Brief aside: **What is LSP?**
-      --
-      -- LSP is an initialism you've probably heard, but might not understand what it is.
-      --
-      -- LSP stands for Language Server Protocol. It's a protocol that helps editors
-      -- and language tooling communicate in a standardized fashion.
-      --
-      -- In general, you have a "server" which is some tool built to understand a particular
-      -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-      -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-      -- processes that communicate with some "client" - in this case, Neovim!
-      --
-      -- LSP provides Neovim with features like:
-      --  - Go to definition
-      --  - Find references
-      --  - Autocompletion
-      --  - Symbol Search
-      --  - and more!
-      --
-      -- Thus, Language Servers are external tools that must be installed separately from
-      -- Neovim. This is where `mason` and related plugins come into play.
-      --
-      -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-      -- and elegantly composed help section, `:help lsp-vs-treesitter`
+      require('mason').setup()
+      require('mason-lspconfig').setup {
+        -- Install these LSPs automatically
+        ensure_installed = {
+          'jdtls',
+        },
+      }
 
-      --  This function gets run when an LSP attaches to a particular buffer.
-      --    That is to say, every time a new file is opened that is associated with
-      --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-      --    function will be executed to configure the current buffer
+      require('mason-tool-installer').setup {
+        -- Install these linters, formatters, debuggers automatically
+        ensure_installed = {
+          'java-debug-adapter',
+          'java-test',
+        },
+      }
+
+      vim.api.nvim_command 'MasonToolsInstall'
+
+      local lspconfig = require 'lspconfig'
+      local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local lsp_attach = function(client, bufnr)
+        -- Create your keybindings here...
+      end
+
+      -- Call setup on each LSP server
+      require('mason-lspconfig').setup_handlers {
+        function(server_name)
+          -- Don't call setup for JDTLS Java LSP because it will be setup from a separate config
+          if server_name ~= 'jdtls' then
+            lspconfig[server_name].setup {
+              on_attach = lsp_attach,
+              capabilities = lsp_capabilities,
+            }
+          end
+        end,
+      }
+
+      -- Lua LSP settings
+      lspconfig.lua_ls.setup {
+        settings = {
+          Lua = {
+            diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = { 'vim' },
+            },
+          },
+        },
+      }
+
+      -- Globally configure all LSP floating preview popups (like hover, signature help, etc)
+      local open_floating_preview = vim.lsp.util.open_floating_preview
+      function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+        opts = opts or {}
+        opts.border = opts.border or 'rounded' -- Set border to rounded
+        return open_floating_preview(contents, syntax, opts, ...)
+      end
+
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
