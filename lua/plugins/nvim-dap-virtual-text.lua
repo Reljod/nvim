@@ -14,5 +14,6 @@ return {
         return variable.name .. ' = ' .. variable.value
       end
     end,
-  },
+  }
 }
+

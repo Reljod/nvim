@@ -1,5 +1,5 @@
 -- JDTLS (Java LSP) configuration
-local jdtls = require 'jdtls'
+local jdtls = require('jdtls')
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_dir = vim.env.HOME .. '/jdtls-workspace/' .. project_name
 
@@ -9,7 +9,7 @@ local bundles = {
 }
 
 -- Needed for running/debugging unit tests
-vim.list_extend(bundles, vim.split(vim.fn.glob(vim.env.HOME .. '/.local/share/nvim/mason/share/java-test/*.jar', 1), '\n'))
+vim.list_extend(bundles, vim.split(vim.fn.glob(vim.env.HOME .. "/.local/share/nvim/mason/share/java-test/*.jar", 1), "\n"))
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
@@ -25,24 +25,18 @@ local config = {
     '-javaagent:' .. vim.env.HOME .. '/.local/share/nvim/mason/share/jdtls/lombok.jar',
     '-Xmx4g',
     '--add-modules=ALL-SYSTEM',
-    '--add-opens',
-    'java.base/java.util=ALL-UNNAMED',
-    '--add-opens',
-    'java.base/java.lang=ALL-UNNAMED',
+    '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+    '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
     -- Eclipse jdtls location
-    '-jar',
-    vim.env.HOME .. '/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher.jar',
-    -- TODO Update this to point to the correct jdtls subdirectory for your OS (config_linux, config_mac, config_win, etc)
-    '-configuration',
-    vim.env.HOME .. '/.local/share/nvim/mason/packages/jdtls/config_mac',
-    '-data',
-    workspace_dir,
+    '-jar', vim.env.HOME .. '/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher.jar',
+    '-configuration', vim.env.HOME .. '/.local/share/nvim/mason/packages/jdtls/config_mac',
+    '-data', workspace_dir
   },
 
   -- This is the default if not provided, you can remove it. Or adjust as needed.
   -- One dedicated LSP server & client will be started per unique root_dir
-  root_dir = require('jdtls.setup').find_root { '.git', 'mvnw', 'pom.xml', 'build.gradle' },
+  root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'pom.xml', 'build.gradle'}),
 
   -- Here you can configure eclipse.jdt.ls specific settings
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
@@ -54,15 +48,14 @@ local config = {
         downloadSources = true,
       },
       configuration = {
-        updateBuildConfiguration = 'interactive',
+        updateBuildConfiguration = "interactive",
         -- TODO Update this by adding any runtimes that you need to support your Java projects and removing any that you don't have installed
         -- The runtime name parameters need to match specific Java execution environments.  See https://github.com/tamago324/nlsp-settings.nvim/blob/2a52e793d4f293c0e1d61ee5794e3ff62bfbbb5d/schemas/_generated/jdtls.json#L317-L334
         runtimes = {
           {
-            name = 'JavaSE-17',
-            path = '/Library/Java/JavaVirtualMachines/jdk-17.0.4.jdk',
-          },
-        },
+            name = "JavaSE-17",
+            path = "/Library/Java/JavaVirtualMachines/jdk-17.0.4.jdk",
+          }
       },
       maven = {
         downloadSources = true,
@@ -88,19 +81,19 @@ local config = {
     },
     completion = {
       favoriteStaticMembers = {
-        'org.hamcrest.MatcherAssert.assertThat',
-        'org.hamcrest.Matchers.*',
-        'org.hamcrest.CoreMatchers.*',
-        'org.junit.jupiter.api.Assertions.*',
-        'java.util.Objects.requireNonNull',
-        'java.util.Objects.requireNonNullElse',
-        'org.mockito.Mockito.*',
+        "org.hamcrest.MatcherAssert.assertThat",
+        "org.hamcrest.Matchers.*",
+        "org.hamcrest.CoreMatchers.*",
+        "org.junit.jupiter.api.Assertions.*",
+        "java.util.Objects.requireNonNull",
+        "java.util.Objects.requireNonNullElse",
+        "org.mockito.Mockito.*",
       },
       importOrder = {
-        'java',
-        'javax',
-        'com',
-        'org',
+        "java",
+        "javax",
+        "com",
+        "org"
       },
     },
     extendedClientCapabilities = jdtls.extendedClientCapabilities,
@@ -112,7 +105,7 @@ local config = {
     },
     codeGeneration = {
       toString = {
-        template = '${object.className}{${member.name()}=${member.value}, ${otherMembers}}',
+        template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
       },
       useBlocks = true,
     },
@@ -124,15 +117,16 @@ local config = {
   },
   init_options = {
     -- References the bundles defined above to support Debugging and Unit Testing
-    bundles = bundles,
+    bundles = bundles
   },
 }
 
 -- Needed for debugging
 config['on_attach'] = function(client, bufnr)
-  jdtls.setup_dap { hotcodereplace = 'auto' }
+  jdtls.setup_dap({ hotcodereplace = 'auto' })
   require('jdtls.dap').setup_dap_main_class_configs()
 end
 
 -- This starts a new client & server, or attaches to an existing client & server based on the `root_dir`.
 jdtls.start_or_attach(config)
+

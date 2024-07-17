@@ -10,7 +10,8 @@ return {
   },
   opts = {
     menu = {
-      width = 120,
-    },
+      width = 120
+    }
   },
 }
+
