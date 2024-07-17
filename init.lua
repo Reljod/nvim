@@ -12,7 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- This has to be set before initializing lazy
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
