@@ -17,6 +17,18 @@ return {
     ensure_installed = {
       'lua',
       'comment',
+      'java',
+      'python',
+      'markdown',
+      'javascript',
+      'typescript',
+      'xml',
+      'yaml',
+      'dockerfile',
+      'luadoc',
+      'bash',
+      'diff',
+      'html'
     },
   },
   config = function (_, opts)
