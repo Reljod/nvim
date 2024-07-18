@@ -56,6 +56,7 @@ local config = {
             name = "JavaSE-17",
             path = "/Library/Java/JavaVirtualMachines/jdk-17.0.4.jdk",
           }
+        }
       },
       maven = {
         downloadSources = true,
