@@ -55,3 +55,28 @@ opt.foldlevel = 20
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()" -- Utilize Treesitter folds
 
+-- Set highlight on search, but clear on pressing <Esc> in normal mode
+opt.hlsearch = true
+
+-- Save undo history
+opt.undofile = true
+
+-- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+opt.ignorecase = true
+opt.smartcase = true
+
+-- Don't show the mode, since it's already in the status lines
+opt.showmode = false
+
+
+-- Override vim options with keymap
+
+vim.keymap.set('n', '<Esc>', '<Esc><Esc><cmd>nohlsearch<CR>')
+
+-- To exit terminal mode
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Scrolling
+vim.keymap.set('n', '}', '}zz', { desc = 'Move paragraph forward and re-center' })
+vim.keymap.set('n', '{', '{zz', { desc = 'Move paragraph forward and re-center' })
+opt.scrolloff = 10
