@@ -6,6 +6,8 @@ opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,te
 -- Line Numbers
 opt.relativenumber = true
 opt.number = true
+opt.nu = true
+vim.o.statuscolumn = '%s %l %r '
 
 -- Tabs & Indentation
 opt.tabstop = 2
