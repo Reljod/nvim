@@ -149,3 +149,10 @@ keymap.set("n", '<leader>d?',
 keymap.set("n", '<leader>df', '<cmd>Telescope dap frames<cr>')
 keymap.set("n", '<leader>dh', '<cmd>Telescope dap commands<cr>')
 keymap.set("n", '<leader>de', function() require('telescope.builtin').diagnostics({ default_text = ":E:" }) end)
+
+
+-- Keymaps for quality of life
+
+-- Keymaps to toggle wrap
+
+keymap.set({ "n", "v" }, "<leader>tw", function() vim.opt.wrap = (not vim.opt.wrap) end)
