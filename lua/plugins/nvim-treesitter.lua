@@ -6,6 +6,7 @@ return {
   dependencies = {
     -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     'nvim-treesitter/nvim-treesitter-textobjects',
+    { 'windwp/nvim-ts-autotag' }
   },
   build = ':TSUpdate',
   opts = {
@@ -28,10 +29,12 @@ return {
       'luadoc',
       'bash',
       'diff',
-      'html'
+      'html',
     },
+    autopairs = { enable = true },
+    autotag = { enable = true },
   },
-  config = function (_, opts)
+  config = function(_, opts)
     local configs = require("nvim-treesitter.configs")
     configs.setup(opts)
   end
