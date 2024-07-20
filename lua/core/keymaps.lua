@@ -47,20 +47,25 @@ keymap.set("n", "<leader>er", ":NvimTreeFocus<CR>")    -- toggle focus to file e
 keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>") -- find file in file explorer
 
 -- Telescope
-keymap.set('n', '<leader>ft', require('telescope.builtin').builtin, { desc = 'Search Telescope' })
 keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
 keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[F]ind [G]it files' })
 keymap.set('n', '<leader>fs', require('telescope.builtin').live_grep, { desc = '[F]ind word in file by [S]earching' })
-keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
 keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]ind [W]ord' })
 keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, {})
 keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, {})
 keymap.set('n', '<leader>fk', require('telescope.builtin').keymaps, { desc = '[F]ind [K]eymaps' })
 keymap.set('n', '<leader>fc', require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[F]ind [C]urrent file' })
 keymap.set('n', '<leader>fo', require('telescope.builtin').lsp_document_symbols, {})
-keymap.set('n', '<leader>fi', require('telescope.builtin').lsp_incoming_calls, {})
+keymap.set('n', '<leader>fi', require('telescope.builtin').lsp_implementations,
+  { desc = '[F]ind LSP [I]mpelementations' })
+keymap.set('n', '<leader>fd', require('telescope.builtin').lsp_definitions, { desc = '[F]ind LSP [D]efinitions' })
+keymap.set('n', '<leader>ft', require('telescope.builtin').lsp_type_definitions,
+  { desc = '[F]ind LSP [T]ype Definitions' })
+keymap.set('n', '<leader>fr', require('telescope.builtin').lsp_references, { desc = '[F]ind LSP [R]eferences' })
+keymap.set('n', '<leader>fe', require('telescope.builtin').diagnostics, { desc = '[F]ind [E]rror Diagnostics' })
 keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({ default_text = ":method:" }) end)
 
+keymap.set('n', '<leader><leader>', require('telescope.builtin').oldfiles, {})
 -- Git-blame
 keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>") -- toggle git blame
 
