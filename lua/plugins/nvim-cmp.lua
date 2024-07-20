@@ -24,6 +24,9 @@ return {
     -- https://github.com/hrsh7th/cmp-cmdline
     'hrsh7th/cmp-cmdline',
   },
+  opts = function(_, opts)
+    table.insert(opts.sorting.comparators, 1, require("clangd_extensions.cmp_scores"))
+  end,
   config = function()
     local cmp = require('cmp')
     local luasnip = require('luasnip')
