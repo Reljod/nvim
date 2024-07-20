@@ -30,6 +30,7 @@ return {
       'bash',
       'diff',
       'html',
+      'cpp'
     },
     autopairs = { enable = true },
     autotag = { enable = true },
@@ -39,4 +40,3 @@ return {
     configs.setup(opts)
   end
 }
-
