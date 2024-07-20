@@ -66,6 +66,7 @@ keymap.set('n', '<leader>fe', require('telescope.builtin').diagnostics, { desc =
 keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({ default_text = ":method:" }) end)
 
 keymap.set('n', '<leader><leader>', require('telescope.builtin').oldfiles, {})
+
 -- Git-blame
 keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>") -- toggle git blame
 

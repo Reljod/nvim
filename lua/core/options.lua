@@ -71,11 +71,6 @@ opt.showmode = false
 
 -- Override vim options with keymap
 
-vim.keymap.set('n', '<Esc>', '<Esc><Esc><cmd>nohlsearch<CR>')
-
--- To exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
 -- Scrolling
 vim.keymap.set('n', '}', '}zz', { desc = 'Move paragraph forward and re-center' })
 vim.keymap.set('n', '{', '{zz', { desc = 'Move paragraph forward and re-center' })
