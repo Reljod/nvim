@@ -87,6 +87,9 @@ return {
         'marksman',
         'quick_lint_js',
         'yamlls',
+        'clangd',
+        'pylsp',
+        'tsserver'
       }
     })
 
@@ -95,6 +98,10 @@ return {
       ensure_installed = {
         'java-debug-adapter',
         'java-test',
+        'codelldb',
+        'isort',
+        'prettier',
+        'prettierd'
       },
     })
 
