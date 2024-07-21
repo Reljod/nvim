@@ -160,3 +160,6 @@ keymap.set("n", '<leader>de', function() require('telescope.builtin').diagnostic
 -- Keymaps to toggle wrap
 
 keymap.set({ "n", "v" }, "<leader>tw", function() vim.opt.wrap = (not vim.opt.wrap) end)
+
+-- Lazy Docker
+keymap.set("n", "<leader>ld", "<cmd>Lazydocker<cr>", { desc = "Open LazyDocker UI"})
