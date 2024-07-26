@@ -66,12 +66,7 @@ return {
           end,
           desc = 'Copy Path to Clipboard',
         },
-        ['O'] = {
-          function(state)
-            require('lazy.util').open(state.tree:get_node().path, { system = true })
-          end,
-          desc = 'Open with System Application',
-        },
+        ['O'] = "system_open",
         ['P'] = { 'toggle_preview', config = { use_float = false } },
       },
     },
@@ -88,6 +83,11 @@ return {
           staged = '󰱒',
         },
       },
+    },
+    commands = {
+      system_open = function()
+        vim.fn.jobstart({ 'open', '.' }, { detach = true })
+      end,
     },
   },
   config = function(_, opts)
