@@ -10,15 +10,6 @@ return {
       desc = 'Explorer NeoTree (Root Dir)',
     },
     {
-      '<leader>fE',
-      function()
-        require('neo-tree.command').execute { toggle = true, dir = vim.uv.cwd() }
-      end,
-      desc = 'Explorer NeoTree (cwd)',
-    },
-    { '<leader>e', '<leader>fe', desc = 'Explorer NeoTree (Root Dir)', remap = true },
-    { '<leader>E', '<leader>fE', desc = 'Explorer NeoTree (cwd)', remap = true },
-    {
       '<leader>ge',
       function()
         require('neo-tree.command').execute { source = 'git_status', toggle = true }
@@ -62,7 +53,7 @@ return {
       use_libuv_file_watcher = true,
     },
     window = {
-      position = "right",
+      position = 'right',
       mappings = {
         ['l'] = 'open',
         ['h'] = 'close_node',
