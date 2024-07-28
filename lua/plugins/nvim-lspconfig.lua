@@ -21,7 +21,7 @@ return {
 
     -- Additional lua configuration, makes nvim stuff amazing!
     -- https://github.com/folke/neodev.nvim
-    { 'folke/neodev.nvim',                        opts = {} },
+    -- { 'folke/neodev.nvim',                        opts = {} },
   },
   opts = {
     servers = {
