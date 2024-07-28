@@ -9,11 +9,11 @@ return {
       end,
       desc = 'Explorer NeoTree (Current Dir)',
     },
-    { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (Current Dir)", remap = true },
+    { '<leader>e', '<leader>fe', desc = 'Explorer NeoTree (Current Dir)', remap = true },
     {
       '<leader>fE',
       function()
-        require('neo-tree.command').execute { action = "focus", dir = vim.uv.cwd() }
+        require('neo-tree.command').execute { action = 'focus', dir = vim.uv.cwd() }
       end,
       desc = 'Close NeoTree',
     },
@@ -76,7 +76,7 @@ return {
         },
         ['O'] = 'system_open',
         ['P'] = { 'toggle_preview', config = { use_float = false } },
-        ['D'] = "diff_files"
+        ['D'] = 'diff_files',
       },
     },
     default_component_configs = {
