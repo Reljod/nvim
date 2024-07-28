@@ -82,7 +82,7 @@ return {
       window = {
         -- Add borders to completions popups
         completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        -- documentation = cmp.config.window.bordered(),
       },
     })
   end,
