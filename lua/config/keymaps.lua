@@ -149,10 +149,25 @@ keymap.set("n", '<leader>dh', '<cmd>Telescope dap commands<cr>')
 keymap.set("n", '<leader>de', function() require('telescope.builtin').diagnostics({ default_text = ":E:" }) end)
 
 
--- Keymaps for quality of life
+-- ##### Keymaps for quality of life #####
+
+-- Moving highlighted line
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- Appending below line will retain cursor position
+vim.keymap.set("n", "J", "mzJ`z")
+
+-- Center screen while doing motions
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+-- Find and replace within file
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Keymaps to toggle wrap
-
 keymap.set({ "n", "v" }, "<leader>tw", function() vim.opt.wrap = (not vim.opt.wrap) end)
 
 -- Lazy Docker
