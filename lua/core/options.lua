@@ -57,6 +57,7 @@ opt.foldexpr = "nvim_treesitter#foldexpr()" -- Utilize Treesitter folds
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 opt.hlsearch = true
+opt.incsearch = true
 
 -- Save undo history
 opt.undofile = true
