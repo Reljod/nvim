@@ -15,7 +15,7 @@ return {
       function()
         require('neo-tree.command').execute { action = 'focus', dir = vim.uv.cwd() }
       end,
-      desc = 'Close NeoTree',
+      desc = 'Focus on NeoTree',
     },
     {
       '<leader>ge',
