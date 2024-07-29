@@ -17,12 +17,6 @@ keymap.set("n", "<leader>sk", "<C-w>+")     -- make split windows height taller
 keymap.set("n", "<leader>sl", "<C-w>>5")    -- make split windows width bigger
 keymap.set("n", "<leader>sh", "<C-w><5")    -- make split windows width smaller
 
--- Tab management
-keymap.set("n", "<leader>to", ":tabnew<CR>")   -- open a new tab
-keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close a tab
-keymap.set("n", "<leader>tn", ":tabn<CR>")     -- next tab
-keymap.set("n", "<leader>tp", ":tabp<CR>")     -- previous tab
-
 -- Diff keymaps
 keymap.set("n", "<leader>cc", ":diffput<CR>")   -- put diff from current to other during diff
 keymap.set("n", "<leader>cj", ":diffget 1<CR>") -- get diff from left (local) during merge
@@ -42,7 +36,7 @@ keymap.set("n", "<leader>qc", ":cclose<CR>") -- close quickfix list
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle maximize tab
 
 -- Neo-tree
-keymap.set("n", "<leader>ee", function() require('neo-tree.command').execute({ toggle = true, dir = LazyVim.root() }) end, {})   -- toggle file explorer
+keymap.set("n", "<leader>ee", function() require('neo-tree.command').execute({ toggle = true, dir = vim.uv.cwd() }) end, {})   -- toggle file explorer
 
 -- Telescope
 keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
