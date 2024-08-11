@@ -21,6 +21,7 @@ return {
       python = { 'isort', 'black' },
       javascript = { { 'prettierd', 'prettier' } },
       java = { 'google-java-format' },
+      c = { 'clang_format' }
     },
     -- Customize formatters
     formatters = {
